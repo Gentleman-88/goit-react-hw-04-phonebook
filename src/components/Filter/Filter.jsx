@@ -10,7 +10,7 @@ export const Filter = ({ filter, handleChangeFilter }) => {
                 onChange={handleChangeFilter}
                 type="text"
                 name="filter"
-                placeholder="Kate..."
+                placeholder="Katua..."
             />
         </div>
     );
