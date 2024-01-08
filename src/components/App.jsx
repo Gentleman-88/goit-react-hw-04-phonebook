@@ -8,6 +8,12 @@ export const App = () => {
   const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')) ?? []);
   const [filter, setFilter] = useState('');
 
+  useEffect(() => {
+      const stringifiedContacts = JSON.stringify(contacts);
+      localStorage.setItem('contacts', stringifiedContacts);
+  }, [contacts])
+
+
   const handleAddContact = formData => {
     const hasDuplicates = contacts.some(
       contact => contact.name.toLowerCase() === formData.name.toLowerCase()
@@ -26,13 +32,8 @@ export const App = () => {
   };
 
   const handleDeleteContact = contactId => {
-    setContacts(contacts.filter(contact => contact.id !== contactId))
+    setContacts(prevState => (contacts.filter(contact => contact.id !== contactId)))
   };
-
-  useEffect(() => {
-      const stringifiedContacts = JSON.stringify(contacts);
-      localStorage.setItem('contacts', stringifiedContacts);
-  }, [contacts])
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter)
